@@ -100,7 +100,7 @@ def get_value(location, ring=1, data_type="KeyUSFacts.TOTPOP_CY"):
 
 	short_data_type = data_type.split(".")[-1]
 
-	print response_json["results"][0]["value"]["FeatureSet"][0]["features"][0]["attributes"][short_data_type]
+	return response_json["results"][0]["value"]["FeatureSet"][0]["features"][0]["attributes"][short_data_type]
 
 
 
