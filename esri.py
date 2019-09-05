@@ -1,4 +1,4 @@
-import requests, json, yaml
+import requests, json, yaml, os
 import pandas as pd
 import usaddress
 import logging
@@ -18,14 +18,15 @@ class Acquisitions(object):
 		pd.set_option('display.max_colwidth', 1000)
 
 		# Get ESRI token
+		self.cwd = os.getcwd()
 		self.get_token()
 
 		# Store traffic count data once
-		self.traffic_df = pd.read_csv("/Users/peteryoon/Documents/Esri/idot_traffic_2017.csv", usecols=["AADT", "ROAD_NAME", "COUNTY_NAM", "KEY_RT_NBR"])
+		self.traffic_df = pd.read_csv(os.path.join(self.cwd, "Documents/GitHub/Acquisitions/idot_traffic_2017.csv"), usecols=["AADT", "ROAD_NAME", "COUNTY_NAM", "KEY_RT_NBR"])
 
 	def get_token(self):
 
-		account_info = yaml.load(open("/Users/peteryoon/Documents/Esri/esri_account_info.yaml", "r"))
+		account_info = yaml.load(open(os.path.join(self.cwd, "Documents/Esri/esri_account_info.yaml"), "r"))
 
 		company_url = "https://msidecap.maps.arcgis.com/"
 		url = "https://www.arcgis.com/sharing/generateToken?parameters"
@@ -40,13 +41,13 @@ class Acquisitions(object):
 		response = requests.post(url=url, params=params)
 		token = response.content.split('"token":"')[1].split('","')[0]
 
-		with open("/Users/peteryoon/Documents/Esri/access_token.yaml", "w") as outfile:
+		with open(os.path.join(self.cwd, "Documents/Esri/access_token.yaml"), "w") as outfile:
 			yaml.safe_dump(token, outfile)
 
 
 	def get_response(self, location, rings, data_types):
 
-		token = yaml.load(open("/Users/peteryoon/Documents/Esri/access_token.yaml", "r"))
+		token = yaml.load(open(os.path.join(self.cwd, "Documents/Esri/access_token.yaml"), "r"))
 
 		if isinstance(location, str):
 			area_details = {
