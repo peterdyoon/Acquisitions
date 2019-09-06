@@ -6,10 +6,11 @@ import logging
 class Acquisitions(object):
 	def __init__(self):
 		super(Acquisitions, self).__init__()
+		
 		# Initialize Logger
-		logging.basicConfig(level=logging.INFO)
-		self.logger = logging.getLogger("Everclean") # debug, info, warning, error, critical
-		self.logger.info("Initializing Acquisitions Class.")
+		# logging.basicConfig(level=logging.INFO)
+		# # self.logger = logging.getLogger("Everclean") # debug, info, warning, error, critical
+		# # self.logger.info("Initializing Acquisitions Class.")
 
 		# Set Pandas Settings
 		pd.set_option("display.max_rows", 2000)
