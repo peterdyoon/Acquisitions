@@ -27,7 +27,7 @@ class Acquisitions(object):
 
 	def get_token(self):
 
-		account_info = yaml.load(open(os.path.join(self.cwd, "Documents/Esri/esri_account_info.yaml"), "r"))
+		account_info = yaml.safe_load(open(os.path.join(self.cwd, "Documents/Esri/esri_account_info.yaml"), "r"))
 
 		company_url = "https://msidecap.maps.arcgis.com/"
 		url = "https://www.arcgis.com/sharing/generateToken?parameters"
@@ -48,7 +48,7 @@ class Acquisitions(object):
 
 	def get_response(self, location, rings, data_types):
 
-		token = yaml.load(open(os.path.join(self.cwd, "Documents/Esri/access_token.yaml"), "r"))
+		token = yaml.safe_load(open(os.path.join(self.cwd, "Documents/Esri/access_token.yaml"), "r"))
 
 		if isinstance(location, str):
 			area_details = {
