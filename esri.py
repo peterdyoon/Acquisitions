@@ -19,6 +19,7 @@ class Acquisitions(object):
 
 		# Get ESRI token
 		self.cwd = os.getcwd()
+		self.cwd = self.cwd.split("Documents/")[0]
 		self.get_token()
 
 		# Store traffic count data once
